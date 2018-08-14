@@ -2,7 +2,7 @@
 # - A client should have an age.
 # - A client can have multiple pets (animals), but it doesn't start with any.
 
-class client
+class Client
     attr_accessor :name, :age, :pets
 
     def initialize(name, age)
@@ -15,12 +15,12 @@ class client
         @name = name
     end
 
-    def add_pet(pet)
-        @pets << pet
+    def add_pet(animal)
+        @pets << animal
     end
 
-    def return_pet(pet)
-        @pets.delete(pet)
+    def return_pet(animal)
+        @pets.delete(animal)
     end
 
 end

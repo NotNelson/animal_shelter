@@ -22,5 +22,5 @@ class Animal
     def give_toy(toy)
         @toys << toy
     end
-    
+
 end
