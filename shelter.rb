@@ -41,4 +41,16 @@ class Shelter
         client.return_pet(animal)
         add_animal(animal)
     end
+
+    def find_animal(animal_name)
+        @animals.find do |animal|
+            animal.name == animal_name
+        end
+    end
+
+    def find_client(client_name)
+        @clients.find do |client|
+            client.name == client_name
+        end
+    end
 end

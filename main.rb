@@ -4,9 +4,6 @@ require_relative "animal"
 
 new_shelter = Shelter.new("New Shelter")
 
-# new_shelter.adopt(new_client, new_animal)
-
-# new_shelter.return(new_client, new_animal)
 def show_menu
     puts "
     ========
@@ -19,12 +16,15 @@ def show_menu
     (3) List clients
     (4) List animals
     --
-    (5) Exit
+    (5) Adopt animal
+    (6) Give animal back
+    --
+    (9) Exit
     "
 end
 
 def graciously_end_execution
-    return 1/0
+    #The end
 end
 
 def get_input
@@ -43,7 +43,7 @@ show_menu
 
 input = get_input
 
-while input != "5"
+while input != "9"
     if input == "1"
         puts "Client name:"
         client_name = gets.chomp
@@ -72,6 +72,25 @@ while input != "5"
         new_shelter.animals.each do |animal|
             puts "name: " + animal.name + ", Species: " + animal.species
         end
+    elsif input == "5"
+        puts "Input animal name:"
+
+        animal = new_shelter.find_animal(gets.chomp)
+        puts "input client name:"
+
+        client = new_shelter.find_client(gets.chomp)
+
+        new_shelter.adopt(client, animal)
+
+        new_shelter.remove_animal(animal)
+    elsif input == "6"
+        puts "input client name:"
+        client = new_shelter.find_client(gets.chomp)
+
+        puts "input animal name:"
+        animal = 
+
+        new_shelter.return(client, animal)
     else
         graciously_end_execution
     end
