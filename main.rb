@@ -2,6 +2,7 @@ require_relative "shelter"
 require_relative "client"
 require_relative "animal"
 require_relative "seed"
+require_relative "catlady"
 
 # This looks dodgy... I know...
 data_creator = Seed.new
@@ -29,7 +30,7 @@ end
 
 def graciously_end_execution
     # The end
-    # There was a division by zero in here, and it was a lot of fun.
+    # There was a division by zero in here and it was a lot of fun.
 end
 
 def get_input
@@ -42,6 +43,16 @@ end
 
 def add_client(shelter, client)
     shelter.add_client(client)
+end
+
+def is_a_catlady(client)
+    return client.class == Catlady
+end
+
+def adopt_animal(shelter, client, animal)
+    shelter.adopt(client, animal)
+
+    shelter.remove_animal(animal)
 end
 
 show_menu
@@ -83,13 +94,15 @@ while input != "9"
 
         puts "Input client name:"
         client = new_shelter.find_client(gets.chomp)
-        puts client.pets.count.to_s
-        if client.pets.count+1 <= 2
-            new_shelter.adopt(client, animal)
 
-            new_shelter.remove_animal(animal)
+        if !is_a_catlady(client) && animal.species == "Cat"
+            if client.pets.count+1 <= 2
+                adopt_animal(new_shelter, client, animal)
+            else
+                puts "HANG ON! HOW MANY PETS CAN YOU TAKE CARE OF?"
+            end
         else
-            puts "HANG ON! HOW MANY PETS CAN YOU TAKE CARE OF?"
+            adopt_animal(new_shelter, client, animal)
         end
     elsif input == "6" # Return an animal
         puts "Input client name:"

@@ -21,7 +21,11 @@ class Shelter
     end
 
     def adopt(client, animal)
-        client.add_pet(animal)
+        if client.class == Catlady
+            client.adopt_cat(animal)
+        else
+            client.add_pet(animal)
+        end
         remove_animal(animal)
     end
 

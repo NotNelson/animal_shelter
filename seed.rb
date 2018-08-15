@@ -1,6 +1,7 @@
 require_relative "shelter"
 require_relative "client"
 require_relative "animal"
+require_relative "catlady"
 
 class Seed
     attr_accessor :new_shelter
@@ -11,7 +12,12 @@ class Seed
             ["Pluto", "Dog"],
             ["Felix", "Cat"],
             ["Dumbo", "Elephant"],
-            ["Pikachu", "Pokemon"]
+            ["Pikachu", "Pokemon"],
+            ["Top Cat", "Cat"],
+            ["Benny the Ball", "Cat"],
+            ["Choo-Choo", "Cat"],
+            ["Brain", "Cat"],
+            ["Fancy-Fancy", "Cat"]
         ]
 
         clients = [
@@ -22,11 +28,21 @@ class Seed
             ["G", 34]
         ]
 
+        catladies = [
+            ["Monica", 58],
+            ["Zaida", 70]
+        ]
+
         @new_shelter = Shelter.new("Stout and Pizza Animal Shelter")
 
         clients.each do |client|
             new_client = Client.new(client[0], client[1])
             new_shelter.add_client(new_client)
+        end
+
+        catladies.each do |catlady|
+            new_catlady = Catlady.new(catlady[0], catlady[1])
+            new_shelter.add_client(new_catlady)
         end
 
         animals.each do |animal|
