@@ -23,4 +23,9 @@ class Client
         @pets.delete(animal)
     end
 
+    def find_animal(animal_name)
+        @pets.find do |pet|
+            pet.name == animal_name
+        end
+    end
 end

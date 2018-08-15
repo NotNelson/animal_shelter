@@ -2,7 +2,7 @@ require_relative "shelter"
 require_relative "client"
 require_relative "animal"
 
-new_shelter = Shelter.new("New Shelter")
+new_shelter = Shelter.new("Stout and Pizza Animal Shelter")
 
 def show_menu
     puts "
@@ -24,7 +24,8 @@ def show_menu
 end
 
 def graciously_end_execution
-    #The end
+    # The end
+    # There was a division by zero in here, and it was a lot of fun.
 end
 
 def get_input
@@ -44,7 +45,7 @@ show_menu
 input = get_input
 
 while input != "9"
-    if input == "1"
+    if input == "1" # Add a client
         puts "Client name:"
         client_name = gets.chomp
 
@@ -54,7 +55,7 @@ while input != "9"
         new_client = Client.new(client_name, client_age)
 
         add_client(new_shelter, new_client)
-    elsif input == "2"
+    elsif input == "2" # Add an animal
         puts "Animal name:"
         animal_name = gets.chomp
 
@@ -64,34 +65,44 @@ while input != "9"
         new_animal = Animal.new(animal_name, animal_species)
 
         add_animal(new_shelter, new_animal)
-    elsif input == "3"
+    elsif input == "3" # List customers
         new_shelter.clients.each do |client|
-            puts "name: " + client.name + ", Age: " + client.age.to_s
+            puts "Name: " + client.name + ", Age: " + client.age.to_s
         end
-    elsif input == "4"
+    elsif input == "4" # List animals in the shelter
         new_shelter.animals.each do |animal|
-            puts "name: " + animal.name + ", Species: " + animal.species
+            puts "Name: " + animal.name + ", Species: " + animal.species
         end
-    elsif input == "5"
+    elsif input == "5" # Adopt and animal
         puts "Input animal name:"
-
         animal = new_shelter.find_animal(gets.chomp)
-        puts "input client name:"
 
+        puts "Input client name:"
         client = new_shelter.find_client(gets.chomp)
 
         new_shelter.adopt(client, animal)
 
         new_shelter.remove_animal(animal)
-    elsif input == "6"
-        puts "input client name:"
+    elsif input == "6" # Return an animal
+        puts "Input client name:"
         client = new_shelter.find_client(gets.chomp)
 
-        puts "input animal name:"
-        animal = 
+        # List animals for the selected client, if any
+        if client.pets.count > 0
+            client.pets.each do |pet|
+                puts pet.name + ", " + pet.species
+            end
 
-        new_shelter.return(client, animal)
-    else
+            puts "Input animal name:"
+            pet_name = gets.chomp
+            animal = client.find_animal(pet_name)
+
+            new_shelter.return(client, animal)
+            client.return_pet(animal)
+        else
+            puts "This guy doesnt have any pets :("
+        end
+    else # Sleep now in the fire
         graciously_end_execution
     end
 
