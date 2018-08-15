@@ -83,10 +83,14 @@ while input != "9"
 
         puts "Input client name:"
         client = new_shelter.find_client(gets.chomp)
+        puts client.pets.count.to_s
+        if client.pets.count+1 <= 2
+            new_shelter.adopt(client, animal)
 
-        new_shelter.adopt(client, animal)
-
-        new_shelter.remove_animal(animal)
+            new_shelter.remove_animal(animal)
+        else
+            puts "HANG ON! HOW MANY PETS CAN YOU TAKE CARE OF?"
+        end
     elsif input == "6" # Return an animal
         puts "Input client name:"
         client = new_shelter.find_client(gets.chomp)
