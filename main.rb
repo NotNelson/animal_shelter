@@ -1,8 +1,12 @@
 require_relative "shelter"
 require_relative "client"
 require_relative "animal"
+require_relative "seed"
 
-new_shelter = Shelter.new("Stout and Pizza Animal Shelter")
+# This looks dodgy... I know...
+data_creator = Seed.new
+data_creator.create_data
+new_shelter = data_creator.new_shelter
 
 def show_menu
     puts "
